@@ -17,7 +17,7 @@ This schema have five major parts:\
 
 ## 4. ER diagrams
 
-![ERD](https://github.com/uttgeorge/hyperparameter-project/blob/master/SQL/Conceptual_Model/ERD.pdf)
+![ERD](https://github.com/uttgeorge/hyperparameter-project/blob/master/SQL/Physical_database/ERD.png)
 
 ## 5. Normalization(till 3NF)
 #### 1NF
