@@ -16,7 +16,8 @@ This schema have five major parts:\
 **5.** Hyper Parameters: In this database, we store hyper parameter not in a single table, but in several different tables separated by their algorithms.
 
 ## 4. ER diagrams
-Mentioned in 3. Conceptual Schema.
+
+![ERD](https://github.com/uttgeorge/hyperparameter-project/blob/master/SQL/Conceptual_Model/ERD.pdf)
 
 ## 5. Normalization(till 3NF)
 #### 1NF
@@ -841,6 +842,10 @@ Results:
 Thanks to Mayuresh Deodhar for his hardwork, he built the machine learning models and got all the data we need.
 
 Tutorial by Prof.Brown: [Link](https://github.com/nikbearbrown/INFO_6210)<br/>
+
+Project Sample by Prabhu: [Project Sample](https://github.com/prabhuSub/Hyperparamter-Samples)
+
+Kaggle - [mushroom dataset](https://www.kaggle.com/uciml/mushroom-classification)
 
 Qi Jin: 50% of this project, including the usecase 1 to 5, Function 1 and 2, View 1 and 2;
 
