@@ -592,7 +592,88 @@ Query OK, 0 rows affected (0.00 sec)
 
 **As we see, when runtime equal 400, performance of GBM changed a lot, so if we choose GBM as our algorithm, set runtime as 400 is better.**
 
-## 8. Citations and References
+## 8. Funtions 
+
+### ***Function 1***
+Input a model, return its rmse.
+```mysql
+SET GLOBAL log_bin_trust_function_creators = 1;
+
+DROP FUNCTION IF EXISTS ask_rmse;
+DELIMITER //
+CREATE FUNCTION ask_rmse (modelname TEXT)
+RETURNS DOUBLE
+BEGIN
+	DECLARE rmse_value DOUBLE;
+	SELECT 
+    rmse
+INTO rmse_value FROM
+    models
+WHERE
+    model_id = modelname;
+    RETURN rmse_value;
+END;
+//
+DELIMITER ;
+```
+```mysql
+SELECT ask_rmse('DRF_1_AutoML_20190420_034740');
+```
+
+Results:
+
+| ask_rmse('DRF_1_AutoML_20190420_034740') |
+|------------------------------------------|
+|                              0.007845196 |
+
+1 row in set (0.00 sec)
+
+
+### ***Function 2***
+Input a dataset name, return the best performance model name measured by rmse.
+```mysql
+DROP FUNCTION IF EXISTS find_best_model;
+DELIMITER //
+CREATE FUNCTION find_best_model (datasetname TEXT)
+RETURNS TEXT
+BEGIN
+	DECLARE modelname TEXT;
+	SELECT 
+    model_id
+INTO modelname FROM
+    (SELECT 
+        t.dataset_name, models.rmse, models.model_id
+    FROM
+        models
+    JOIN (SELECT 
+        data_repository.dataset_name, metadata.*
+    FROM
+        metadata
+    JOIN data_repository ON metadata.dataset_id = data_repository.dataset_id
+    WHERE
+        data_repository.dataset_name = datasetname) t ON models.run_id = t.run_id) m
+ORDER BY m.rmse
+LIMIT 1;
+    RETURN modelname;
+END;
+//
+DELIMITER ;
+```
+```mysql
+SELECT find_best_model('mushroom');
+```
+
+| find_best_model('mushroom')               |
+|-------------------------------------------|
+| GBM_grid_1_AutoML_20190420_034740_model_3 |
+
+1 row in set (0.00 sec)
+
+## 9. Views
+
+
+
+## 10. Citations and References
 
 Thanks to Mayuresh Deodhar for his hardwork, he built the machine learning models and got all the data we need.
 
@@ -602,6 +683,6 @@ Qi Jin: 50% of this project, including the usecase 1 to 5.
 
 Dongyu Zhang: 50% of this project, including the usecase 6 to 10.
 
-## 9. License
+## 11. License
 
 [License](https://github.com/INFO6105-Spring19/hyperparameter-db-project-db17/blob/master/LICENSE)
