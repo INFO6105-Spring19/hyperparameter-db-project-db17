@@ -1,0 +1,24 @@
+Columns,Data Type,Variable type
+class,string,Dependent
+cap-shape,string,Independent
+cap-surface,string,Independent
+cap-color,string,Independent
+bruises,string,Independent
+odor,string,Independent
+gill-attachment,string,Independent
+gill-spacing,string,Independent
+gill-size,string,Independent
+gill-color,string,Independent
+stalk-shape,string,Independent
+stalk-root,string,Independent
+stalk-surface-above-ring,string,Independent
+stalk-surface-below-ring,string,Independent
+stalk-color-above-ring,string,Independent
+stalk-color-below-ring,string,Independent
+veil-type,string,Independent
+veil-color,string,Independent
+ring-number,string,Independent
+ring-type,string,Independent
+spore-prstring-color,string,Independent
+population,string,Independent
+habitat,string,Independent
