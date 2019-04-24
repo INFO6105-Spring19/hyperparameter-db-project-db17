@@ -594,7 +594,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## 8. Citations and References
 
-Thanks to Mayuresh Deodhar for his hardwork, he built the model and got all the data we need.
+Thanks to Mayuresh Deodhar for his hardwork, he built the machine learning models and got all the data we need.
 
 Tutorial by Prof.Brown: [Link](https://github.com/nikbearbrown/INFO_6210)<br/>
 
