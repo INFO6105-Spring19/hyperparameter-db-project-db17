@@ -61,6 +61,9 @@ Mentioned in 3. Conceptual Schema.
 ## 6. Physical model
 
 ### *6.1 Create Tables*
+
+[Create Tables](https://github.com/uttgeorge/hyperparameter-project/blob/master/SQL/Physical_database/hyperparameter.sql) SQL file is in SQL folder.
+
 ##### Create Database
 Database called hyperparameter
 ```mysql
@@ -74,7 +77,7 @@ A table to store the id and the name of each dataset
 ```mysql
 drop table if exists data_repository;
 create table if not exists data_repository(
-	dataset_id int primary key auto_increment,
+    dataset_id int primary key auto_increment,
     dataset_name text not null
 );
 ```
@@ -84,7 +87,7 @@ For each predictor_id, we will have several predictors
 ```mysql
 drop table if exists predictors;
 create table if not exists predictors(
-	dataset_id int not null,
+    dataset_id int not null,
     predictor_name varchar(255) not null,
     constraint predictor_pk primary key (dataset_id,predictor_name),
     constraint predictor_fk foreign key (dataset_id) references data_repository(dataset_id)
@@ -96,7 +99,7 @@ For each dataset,there are several meta data, including run time, run id.
 ```mysql
 drop table if exists metadata;
 create table if not exists metadata(
-	dataset_id int not null,
+    dataset_id int not null,
     run_id varchar(255) primary key,
     min_mem_size int not null,
     scale text not null,
@@ -110,9 +113,9 @@ For each run id, we will generate several models with their performance respecti
 ```mysql
 drop table if exists models;
 create table models(
-	run_id varchar(255) not null,
-	model_id varchar(255) not null,
-	auc double default null,
+    run_id varchar(255) not null,
+    model_id varchar(255) not null,
+    auc double default null,
     logloss double default null,
     mean_per_class_error double default null,
     rmse double default null,
@@ -143,6 +146,8 @@ CREATE TABLE IF NOT EXISTS GBM_model (
 );
 ```
 ### *6.2 Import Data*
+
+[Import Data](https://github.com/uttgeorge/hyperparameter-project/blob/master/SQL/Physical_database/importdata.sql) SQL file is in SQL folder.
 
 1. data_repository 
 ```mysql
@@ -207,6 +212,8 @@ VALUES
 ...;
 ```
 ## 7. use cases
+
+[Qi Jin's Use Cases](https://github.com/uttgeorge/hyperparameter-project/blob/master/SQL/Physical_database/QI%20JIN%20USECASE.sql) SQL file is in SQL folder.
 
 ### ***Case 1***
 
@@ -597,4 +604,4 @@ Dongyu Zhang: 50% of this project, including the usecase 6 to 10.
 
 ## 9. License
 
-[License]
+[License](https://github.com/INFO6105-Spring19/hyperparameter-db-project-db17/blob/master/LICENSE)
