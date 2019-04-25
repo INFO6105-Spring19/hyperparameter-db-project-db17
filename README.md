@@ -772,6 +772,36 @@ Results:
 
 1 row in set (0.00 sec)
 
+
+### ***Function 3***
+```mysql
+DROP FUNCTION IF EXISTS get_logloss;
+DELIMITER //
+CREATE FUNCTION get_logloss(id varchar(255))
+RETURNS DOUBLE
+BEGIN
+ DECLARE log_loss DOUBLE;
+ SELECT logloss INTO log_loss FROM
+    models
+WHERE
+    model_id = id;
+    RETURN log_loss;
+END;
+//
+DELIMITER ;
+-- test
+SELECT get_logloss('DeepLearning_1_AutoML_20190420_034740');
+```
+Results:
+
+| get_logloss('DeepLearning_1_AutoML_20190420_034740') |
+|------------------------------------------------------|
+|                                          0.000980243 |
+
+1 row in set (0.00 sec)
+
+### ***Function 4***
+
 ## 9. Views
 
 ### ***View 1***
