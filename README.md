@@ -480,7 +480,7 @@ Results:
 Query OK, 0 rows affected (0.00 sec)
 
 ### ***Case 5***
-In this case, we will find the change of performance for each algorithm. If the change is not tramatic, we can choose the short runtime, if the change is big, we have to check which time is better. So this case will also show the deviation of a algorithm by its runtime.
+In this case, we will find the change of performance for each algorithm. If the change is not dramatic, we can choose the short runtime, if the change is big, we have to check which time is better. So this case will also show the deviation of a algorithm by its runtime.
 
 This is the procedure to know change of performance for each algorithm of all time.
 ```mysql
