@@ -218,7 +218,7 @@ VALUES
 
 ### ***Case 1***
 
-Find the best model' name and aucuracy by their measurement: rmse,mse. 
+Find the best model' name and accuracy by their measurement: rmse,mse. 
 Return its model name and auc, and runtime respectively.
 ```mysql
 DROP VIEW best_model;
