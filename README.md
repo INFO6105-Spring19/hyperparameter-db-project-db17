@@ -212,7 +212,7 @@ VALUES
 ('GLM_grid_1_AutoML_20190420_034740_model_1','actual',0.0001,'','binomial','MeanImputation',1,1.71321e18,'TRUE',5,'FALSE','','automl_training_Key_Frame__upload_8690c96acf38431d14ed72e27dea4966.hex',-1,'FALSE',0,'','FALSE',0.0000000001,'','','TRUE','','class','TRUE','','[]','FALSE','TRUE','logit',0.000001,'[0.0, 0.2, 0.4, 0.6, 0.8, 1.0]',20,'FALSE','TRUE',5000,'FALSE','COORDINATE_DESCENT',0.0001,30,'Modulo',0,'','TRUE',5,0,'',0.000123092,0.000001,300,'','FALSE','[19.455893037534402, 12.082439195938939, 7.503399440052737, 4.659738174052406, 2.893776350865394, 1.7970841399325495, 1.116019696902739, 0.6930671392612864, 0.43040643534957707, 0.26728968825124244, 0.16599142479693543, 0.10308348700761596, 0.06401659186098818, 0.03975538810783111, 0.024688769546437426, 0.015332144162794084, 0.009521521280618938, 0.005913026027845397, 0.003672089341137756, 0.002280429692985968, 0.0014161854741368584, 0.0008794751722997229, 0.0005461689819711281, 0.0003391801909397374, 0.00021063664492759166, 0.00013080892508323167, 8.12345586273109e-05, 5.0448037174643384e-05, 3.1329085770628844e-05, 1.945589303753436e-05]'),
 ...;
 ```
-## 7. use cases
+## 7. Use Cases
 
 [Qi Jin's Use Cases](https://github.com/uttgeorge/hyperparameter-project/blob/master/SQL/Physical_database/QI%20JIN%20USECASE.sql) SQL file is in SQL folder.
 
@@ -594,6 +594,106 @@ Query OK, 0 rows affected (0.00 sec)
 
 **As we see, when runtime equal 600, rmse deviation is relatively big, and in 800, it become very small. So if we choose GBM as our algorithm, set runtime as 600 might be better.**
 
+### ***Case 6***
+
+Find what type of question this dataset is on and the target variable.
+```mysql
+drop view if exists dataset_type;
+create view dataset_type AS
+select distinct target, classification
+from metadata
+where dataset_id = 1;
+select * from dataset_type;
+```
+Results:
+
+| target | classification |
+|--------|----------------|
+| class  | TRUE           |
+
+1 row in set (0.00 sec)
+
+### ***Case 7***
+List all different models names and frequencies
+```mysql
+select distinct model_category,
+count(*) as model_count
+from models
+group by model_category
+order by model_count DESC;
+```
+Results:
+
+| model_category               | model_count |
+|------------------------------|-------------|
+| GBM                          |          55 |
+| DeepLearning                 |          27 |
+| DRF                          |           5 |
+| GLM                          |           5 |
+| StackedEnsemble_AllModels    |           5 |
+| StackedEnsemble_BestOfFamily |           5 |
+| XRT                          |           5 |
+
+7 rows in set (0.00 sec)
+
+### ***Case 8***
+List run id and corresponding run time
+```mysql
+select run_id, run_time
+from metadata
+where dataset_id = 1
+order by run_time;
+```
+Results:
+
+| run_id     | run_time |
+|------------|----------|
+| JjUS31JGhX |      200 |
+| 2Rr6eu3vHP |      400 |
+| KPiL6NvWlS |      600 |
+| utthNoQEU0 |      800 |
+| fICT1DYlnK |     1000 |
+
+5 rows in set (0.00 sec)
+
+### ***Case 9***
+Find best model in each category with lowest logloss, mean class error
+```mysql
+create view Logloss AS
+select distinct models.model_category,
+                models.model_id,
+        min(models.logloss),
+        min(models.mean_per_class_error),
+		metadata.run_time AS runtime
+    FROM
+        models
+        JOIN
+        metadata ON models.run_id = metadata.run_id
+    group by models.model_category
+    order by logloss, mean_per_class_error asc;
+SELECT * FROM logloss;
+```
+Results:
+
+
+### ***Case 10***
+In GLM model, compare the two families result using logloss and rmse
+```mysql
+select glm_model.family,
+glm_model.GLM_model_id as model_id,
+models.logloss, 
+models.rmse 
+FROM
+glm_model
+JOIN
+models ON models.model_id = model_id
+group by glm_model.family
+order by logloss, rmse asc;
+```
+Results:
+
+
+
 ## 8. Funtions 
 
 ### ***Function 1***
@@ -838,6 +938,42 @@ Results:
 
 55 rows in set (0.00 sec)
 
+### ***View 3***
+Find what type of question this dataset is on and the target variable
+```mysql
+drop view if exists dataset_type;
+create view dataset_type AS
+select distinct target, classification
+from metadata
+where dataset_id = 1;
+select * from dataset_type;
+```
+
+Results:
+| target | classification |
+|--------|----------------|
+| class  | TRUE           |
+
+1 row in set (0.00 sec)
+
+### ***View 4***
+Find best model in each category with lowest logloss, mean class error
+```mysql
+create view Logloss AS
+select distinct models.model_category,
+                models.model_id,
+        min(models.logloss),
+        min(models.mean_per_class_error),
+		metadata.run_time AS runtime
+    FROM
+        models
+        JOIN
+        metadata ON models.run_id = metadata.run_id
+    group by models.model_category
+    order by logloss, mean_per_class_error asc;
+SELECT * FROM logloss;
+```
+Results:
 
 
 ## 10. Citations and References
