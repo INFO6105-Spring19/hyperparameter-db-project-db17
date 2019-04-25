@@ -950,6 +950,7 @@ select * from dataset_type;
 ```
 
 Results:
+
 | target | classification |
 |--------|----------------|
 | class  | TRUE           |
