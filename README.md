@@ -571,7 +571,8 @@ Results:
 
 Query OK, 0 rows affected (0.00 sec)
 
-**GBM changed a lot, GLM did not change at all, let's take a look at GBM.**
+**GBM changed a lot, GLM did not change at all.
+In this case, if we use GLM, 200sc is ok enough. But for GBM is not. let's take a look at GBM.**
 
 ```mysql
 CALL change_by_time('mushroom','GBM');
@@ -591,7 +592,7 @@ Results:
 
 Query OK, 0 rows affected (0.00 sec)
 
-**As we see, when runtime equal 400, performance of GBM changed a lot, so if we choose GBM as our algorithm, set runtime as 400 is better.**
+**As we see, when runtime equal 600, rmse deviation is relatively big, and in 800, it become very small. So if we choose GBM as our algorithm, set runtime as 600 might be better.**
 
 ## 8. Funtions 
 
