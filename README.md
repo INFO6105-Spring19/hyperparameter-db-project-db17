@@ -960,7 +960,7 @@ Results:
 ### ***View 4***
 Find best model in each category with lowest logloss, mean class error
 ```mysql
-create view Logloss AS
+create view logloss AS
 select distinct models.model_category,
                 models.model_id,
         min(models.logloss),
