@@ -423,7 +423,7 @@ CALL find_predictors('mushroom');
 | stalk-surface-below-ring |
 | veil-color               |
 | veil-type                |
-|--------------------------|
+
 22 rows in set (0.00 sec)
 
 Query OK, 0 rows affected (0.00 sec)
