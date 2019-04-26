@@ -803,39 +803,22 @@ Results:
 ### ***Function 4***
 
 ```mysql
-DROP FUNCTION IF EXISTS get_runtime;
+DROP FUNCTION IF EXISTS get_auc;
 DELIMITER //
-CREATE FUNCTION get_runtime(id varchar(255))
-RETURNS double
+CREATE FUNCTION get_auc(id varchar(255))
+RETURNS DOUBLE
 BEGIN
-	DECLARE runtime double;
-	SELECT run_time INTO runtime FROM
-    metadata
+	DECLARE auc1 DOUBLE;
+	SELECT auc INTO auc1 FROM
+    models
 WHERE
-    run_time = runtime;
-    RETURN runtime;
+    model_id = id;
+    RETURN auc1;
 END;
 //
 DELIMITER ;
 -- test
-SELECT get_runtime('2Rr6eu3vHP');
-
-DROP FUNCTION IF EXISTS family_type;
-DELIMITER //
-CREATE FUNCTION family_type(type varchar(255))
-RETURNS varchar(255)
-BEGIN
-	DECLARE class varchar(255);
-	SELECT family INTO class FROM
-    glm_model
-WHERE
-    class = family;
-    RETURN class;
-END;
-//
-DELIMITER ;
--- test
-SELECT family_type('GLM_grid_1_AutoML_20190419_130933_model_1');
+SELECT get_auc('XRT_1_AutoML_20190420_055921');
 ```
 Results:
 
