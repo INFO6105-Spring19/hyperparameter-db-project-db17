@@ -673,7 +673,7 @@ select distinct models.model_category,
     order by logloss, mean_per_class_error asc;
 SELECT * FROM logloss;
 ```
-Results:
+![results](https://github.com/INFO6105-Spring19/hyperparameter-db-project-db17/blob/master/SQL/Physical_database/usecase4.JPG)
 
 
 ### ***Case 10***
@@ -690,7 +690,7 @@ models ON models.model_id = model_id
 group by glm_model.family
 order by logloss, rmse asc;
 ```
-Results:
+![results]()
 
 
 
@@ -820,6 +820,7 @@ DELIMITER ;
 -- test
 SELECT get_auc('XRT_1_AutoML_20190420_055921');
 ```
+![results]()
 
 
 ## 9. Views
@@ -1024,8 +1025,6 @@ select distinct models.model_category,
     order by logloss, mean_per_class_error asc;
 SELECT * FROM logloss;
 ```
-Results:
-
 ![results]()
 
 ## 10. Citations and References
