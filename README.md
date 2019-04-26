@@ -615,8 +615,8 @@ Results:
 1 row in set (0.00 sec)
 
 ### ***Case 7***
-List all different models names and frequencies
-output shows 7 different models with the their counts
+List all different models names and frequencies.
+The output shows 7 different models with the their counts
 ```mysql
 select distinct model_category,
 count(*) as model_count
@@ -639,8 +639,8 @@ Results:
 7 rows in set (0.00 sec)
 
 ### ***Case 8***
-List run id and corresponding run time
-output showws 5 run id with 5 run time
+List run id and corresponding run time.
+The output showws 5 run id with 5 run time
 ```mysql
 select run_id, run_time
 from metadata
@@ -660,8 +660,8 @@ Results:
 5 rows in set (0.00 sec)
 
 ### ***Case 9***
-Find best model in each category with lowest logloss, mean class error
-the output shows 7 different models with their models id and minimum logloss, mean class error
+Find best model in each category with lowest logloss, mean class error. 
+The output shows 7 different models with their models id and minimum logloss, mean class error
 ```mysql
 create view Logloss AS
 select distinct models.model_category,
@@ -681,8 +681,8 @@ SELECT * FROM logloss;
 
 
 ### ***Case 10***
-In GLM model, compare the two families result using logloss and rmse
-the output shows a pair of family in guassian and binomial with model id, logloss and rmse
+In GLM model, compare the two families result using logloss and rmse. 
+The output shows a pair of family in guassian and binomial with model id, logloss and rmse
 ```mysql
 select glm_model.family,
 glm_model.GLM_model_id as model_id,
