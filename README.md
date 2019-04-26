@@ -820,8 +820,6 @@ DELIMITER ;
 -- test
 SELECT get_auc('XRT_1_AutoML_20190420_055921');
 ```
-Results:
-
 
 
 ## 9. Views
