@@ -596,7 +596,8 @@ Query OK, 0 rows affected (0.00 sec)
 
 ### ***Case 6***
 
-Find what type of question this dataset is on and the target variable.
+Find what type of question this dataset works on and the target variable.
+The target shows class and true in classfication
 ```mysql
 drop view if exists dataset_type;
 create view dataset_type AS
@@ -615,6 +616,7 @@ Results:
 
 ### ***Case 7***
 List all different models names and frequencies
+output shows 7 different models with the their counts
 ```mysql
 select distinct model_category,
 count(*) as model_count
@@ -638,6 +640,7 @@ Results:
 
 ### ***Case 8***
 List run id and corresponding run time
+output showws 5 run id with 5 run time
 ```mysql
 select run_id, run_time
 from metadata
@@ -658,6 +661,7 @@ Results:
 
 ### ***Case 9***
 Find best model in each category with lowest logloss, mean class error
+the output shows 7 different models with their models id and minimum logloss, mean class error
 ```mysql
 create view Logloss AS
 select distinct models.model_category,
@@ -678,6 +682,7 @@ SELECT * FROM logloss;
 
 ### ***Case 10***
 In GLM model, compare the two families result using logloss and rmse
+the output shows a pair of family in guassian and binomial with model id, logloss and rmse
 ```mysql
 select glm_model.family,
 glm_model.GLM_model_id as model_id,
@@ -774,6 +779,7 @@ Results:
 
 
 ### ***Function 3***
+input a model id and output its logloss
 ```mysql
 DROP FUNCTION IF EXISTS get_logloss;
 DELIMITER //
@@ -801,6 +807,7 @@ Results:
 1 row in set (0.00 sec)
 
 ### ***Function 4***
+input model id and output its auccuracy
 
 ```mysql
 DROP FUNCTION IF EXISTS get_auc;
@@ -990,7 +997,7 @@ Results:
 55 rows in set (0.00 sec)
 
 ### ***View 3***
-Find what type of question this dataset is on and the target variable
+Show the type of question this dataset works on and the target variable
 ```mysql
 drop view if exists dataset_type;
 create view dataset_type AS
@@ -1009,7 +1016,7 @@ Results:
 1 row in set (0.00 sec)
 
 ### ***View 4***
-Find best model in each category with lowest logloss, mean class error
+Show the best model in each category with corresponding lowest logloss, mean class error
 ```mysql
 create view logloss AS
 select distinct models.model_category,
